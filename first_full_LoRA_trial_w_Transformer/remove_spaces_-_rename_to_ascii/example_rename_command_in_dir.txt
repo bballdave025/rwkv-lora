@@ -1,0 +1,1 @@
+find . -maxdepth 1 -type f \( -not -name "*.sh" -a -not -name "*.py" -a -not -name "*.out" -a -not -name "*.txt" -a -not -name "*.pyc" \) -print0 | xargs -I'{}' -0 bash -c './rename_file_to_ascii.sh "{}"'
