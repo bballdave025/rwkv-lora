@@ -190,6 +190,7 @@ def print_system_information():
   print("### No network info for now ###")
   # print_network_info()
   print()
+  print("########################################################")
   print("##### The last attempts for any useful system info #####")
   print("These might give lots of info, or new info.")
   print("Then again, they might fail miserably.")
@@ -202,6 +203,7 @@ def print_system_information():
                            do_output_long_info=True
   )
   print()
+  print("From qwqfetch, a python-only copycat of screenfetch")
   print("Should be a good recap, but might not be complete.")
   print(" ...")
   print_qwqfetch_screenfetch_sysinfo()
@@ -306,6 +308,7 @@ def print_gpu_graphics_card_info():
   ##endof:  if/else can_do_wmi
   
   if can_do_torch:
+    print()
     print("Using  PyTorch  and the `torch.cuda.is_available()` method.")
     torch_cuda_is_available = torch.cuda.is_available()
     print("The statement, 'There is CUDA and an appropriate GPU',")
@@ -321,6 +324,7 @@ def print_gpu_graphics_card_info():
   ##endof:  if can_do_torch
   
   if can_do_tf:
+    print()
     print("Using  TensorFlow  with several of its methods.")
     print("  Attempting to get GPU Device List")
     gpu_device_list = tf.config.list_physical_devices('GPU')
@@ -341,19 +345,19 @@ def print_gpu_graphics_card_info():
   ##endof:  if can_do_tf
   
   if can_do_tfdl:
-    print("Tensorflow can give us CPU (and/or GPU) info.")
+    print("# Tensorflow can give us CPU (and/or GPU) info.")
     print("The info here might help you know if we're running on a CPU.")
     device_lib.list_local_devices()
     print("# -- (i) -- #")
     print("Sometimes, this doesn't show up when run on Windows")
-    print("through this script, but it does show up when run")
-    print("from the command line.")
+    print("through this script, but it does show up when run from")
+    print("from the command prompt.")
     print("(Where \"this\" refers to")
     print("   tensorflow.python.client.device_lib.list_local_devices()")
     print("If the other info tells you that this is probably")
     print("Dave's PC in the corner of the room (3 screens),")
     print("then the inbput/output on the command line would likely")
-    print("be as follows:")
+    print("be as follows.")
     print("""
           (conda-env) >pip install tensorflow-cpu
           (conda-env) >python
@@ -624,7 +628,6 @@ def print_all_pci_devices_from_lspci(
   ##endof:  if num_devices == 0
   
   for i in range(num_devices):
-    print()
     this_device = device_list[i]
     this_cls = this_device.cls
     
@@ -637,9 +640,9 @@ def print_all_pci_devices_from_lspci(
     print("\n", "+"*big_plus_width, "\n", "device at index:", str(i))
     
     if do_output_short_info:
-      print("\n", "Type of my_device: ", str(type(my_device)), "\n", 
-            "my_cls as a string:", str(my_cls), "\n", 
-            "Type of my_cls", str(type(my_cls))
+      print("\n", "Type of this_device: ", str(type(this_device)), "\n", 
+            "this_cls as a string:", str(this_cls), "\n", 
+            "Type of this_cls", str(type(this_cls))
       )
     ##endof:  if do_output_short_info
     

@@ -1,0 +1,685 @@
+(conda-env-lora) C:\path\to\repo\and\script>python
+Python 3.10.14 | packaged by Anaconda, Inc. | \
+  (main, May  6 2024, 19:44:50) [MSC v.1916 64 bit (AMD64)] on win32
+Type "help", "copyright", "credits" or "license" for more information.
+>>>
+>>> import os
+>>> retval = os.system( \
+...   "powershell -c (Get-Date -UFormat \"%s_%Y%m%dT%H%M%S%Z00\") " + \
+...   "-replace '[.][0-9]*_', '_'")
+1717399500_20240603T072500-0600
+>>>
+>>> import system_info_as_script as sias
+2024-06-03 07:25:10.141235: I tensorflow/core/util/port.cc:113] \
+oneDNN custom operations are on. \
+You may see slightly different numerical results due to \
+floating-point round-off errors from different computation \
+orders. To turn them off, set the environment variable \
+`TF_ENABLE_ONEDNN_OPTS=0`.
+2024-06-03 07:25:10.953548: I tensorflow/core/util/port.cc:113] \
+oneDNN custom operations are on. \
+You may see slightly different numerical results due to \
+floating-point round-off errors from different computation \
+orders. To turn them off, set the environment variable \
+`TF_ENABLE_ONEDNN_OPTS=0`.
+>>>
+>>> sias.run()
+
+#########################  System Information  #########################
+System: Windows
+Node Name: MYMACHINE
+Release: 10
+Version: 10.0.19045
+Machine: AMD64
+Processor: Intel64 Family 6 Model 165 Stepping 3, GenuineIntel
+Processor: Intel(R) Core(TM) i3-10100 CPU @ 3.60GHz
+Ip-Address: NOT-FOR-NOW
+Mac-Address: NOT-FOR-NOW
+
+#############################  Boot Time  ##############################
+Boot Time (date and time of last boot) was
+Boot Time: 2024-5-26T14:28:58
+
+##############################  CPU Info  ##############################
+Physical cores: 4
+Total cores: 8
+CPU Usage Per Core:
+Core 0: 1.6%
+Core 1: 0.0%
+Core 2: 1.6%
+Core 3: 0.0%
+Core 4: 1.6%
+Core 5: 1.6%
+Core 6: 0.0%
+Core 7: 1.6%
+Total CPU Usage: 5.7%
+Max Frequency: 3600.00Mhz
+Min Frequency: 0.00Mhz
+Current Frequency: 3600.00Mhz
+
+##############################  GPU Info  ##############################
+Information on GPU(s)/Graphics Card(s)
+ (if any such information is to be found)
+
+Using `wmi`, we get the following `win32_VideoController` names.
+   Trigger 6 External Graphics
+   Intel(R) UHD Graphics 630
+
+Using  PyTorch  and the `torch.cuda.is_available()` method.
+The statement, 'There is CUDA and an appropriate GPU',
+  is ...  False
+
+Using  TensorFlow  with several of its methods.
+  Attempting to get GPU Device List
+No GPU devices found by TensorFlow.
+# Tensorflow can give us CPU (and/or GPU) info.
+The info here might help you know if we're running on a CPU.
+2024-06-03 07:25:24.380420: I tensorflow/core/platform/cpu_feature_guard.cc:210] This TensorFlow binary is optimized to use available CPU instructions in performance-critical operations.
+To enable the following instructions: AVX2 FMA, in other operations, rebuild TensorFlow with the appropriate compiler flags.
+# -- (i) -- #
+Sometimes, this doesn't show up when run on Windows
+through this script, but it does show up when run from
+from the command prompt.
+(Where "this" refers to
+   tensorflow.python.client.device_lib.list_local_devices()
+If the other info tells you that this is probably
+Dave's PC in the corner of the room (3 screens),
+then the inbput/output on the command line would likely
+be as follows.
+
+          (conda-env) >pip install tensorflow-cpu
+          (conda-env) >python
+          Python 3.10.14 | packaged by Anaconda, Inc. | \
+            (main, May  6 2024, 19:44:50) \
+            [MSC v.1916 64 bit (AMD64)] on win32
+          Type "help", "copyright", "credits" or "license" for more information.
+          >>>
+          >>> from tensorflow.python.client import device_lib
+          2024-06-02 09:50:02.208877: I tensorflow/core/util/port.cc:113] \
+            oneDNN custom operations are on. \
+            You may see slightly different numerical results due to \
+            floating-point round-off errors from different computation \
+            orders. To turn them off, set the environment variable \
+            `TF_ENABLE_ONEDNN_OPTS=0`.
+          2024-06-02 09:50:04.867132: I tensorflow/core/util/port.cc:113] \
+            oneDNN custom operations are on. \
+            You may see slightly different numerical results due to \
+            floating-point round-off errors from different computation \
+            orders. To turn them off, set the environment variable \
+            `TF_ENABLE_ONEDNN_OPTS=0`.
+          >>> device_lib.list_local_devices
+          <function list_local_devices at 0x000001E69CF6E200>
+          >>> device_lib.list_local_devices()
+          2024-06-02 09:50:25.325804: \
+            I tensorflow/core/platform/cpu_feature_guard.cc:210] \
+            This TensorFlow binary is optimized to use available CPU \
+            instructions in performance-critical operations.
+          To enable the following instructions: AVX2 FMA, in other \
+            operations, rebuild TensorFlow with the appropriate compiler \
+            flags.
+          [name: "/device:CPU:0"
+          device_type: "CPU"
+          memory_limit: 268435456
+          locality {
+          }
+          incarnation: 4538066893645489801
+          xla_global_id: -1
+          ]
+          >>>
+
+
+Trying to use some nvidia code ( nvidia-smi ) to find information
+  That nvidia stuff didn't work
+  The error information is:
+[WinError 2] The system cannot find the file specified
+  Neither a big surprise nor a big deal
+  That's the end of the nvidia try.
+
+Trying to use  [py]lspci   to find information
+   ... we have a device_list
+
+ ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+ device at index: 1
+
+ Type of this_device:  <class 'pylspci.device.Device'>
+ this_cls as a string: VGA compatible controller [0300]
+ Type of this_cls <class 'pylspci.fields.NameWithID'>
+
+ -------------------------
+ is_likely_graphics: , True
+ -------------------------
+
+
+ All device information:
+ Device(
+     slot=Slot('0000:00:02.0'),
+     cls=NameWithID('VGA compatible controller [0300]'),
+     vendor=NameWithID('Intel Corporation [8086]'),
+     device=NameWithID('Device [9bc8]'),
+     subsystem_vendor=NameWithID('Dell [1028]'),
+     subsystem_device=NameWithID('Device [09c5]'),
+     revision=3,
+     progif=None,
+     driver=None,
+     kernel_modules=[],
+     numa_node=None,
+     iommu_group=None,
+     physical_slot=None
+)
+
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+
+
+There might be graphics card/GPU information in
+the output from a python-only screenfetch copycat.
+Getting the 'GPU' line from the qwqfetch output
+GPU: Trigger 6 External Graphics
+
+Those are all our chances to find out about any GPU/Graphics Cards
+
+######################  Memory (RAM) Information  ######################
+Total: 31.67GiB
+Available: 22.98GiB
+Used: 8.69GiB
+Percentage: 27.4%
+      =============== SWAP Memory ===============
+Total: 4.75GiB
+Free: 4.64GiB
+Used: 117.60MiB
+Percentage: 2.4%
+
+#############################  Disk Info  ##############################
+Partitions and Usage:
+=== Device: C:\ ===
+  Mountpoint: C:\
+  File system type: NTFS
+  Total Size: 915.94GiB
+  Used: 592.57GiB
+  Free: 323.37GiB
+  Percentage: 64.7%
+=== Device: D:\ ===
+  Mountpoint: D:\
+  File system type: exFAT
+  Total Size: 12.73TiB
+  Used: 1.99TiB
+  Free: 10.75TiB
+  Percentage: 15.6%
+=== Device: E:\ ===
+  Mountpoint: E:\
+  File system type: FAT32
+  Total Size: 115.31GiB
+  Used: 46.08GiB
+  Free: 69.23GiB
+  Percentage: 40.0%
+  Since last boot,
+Total read: 232.89GiB
+Total write: 312.63GiB
+
+### No network info for now ###
+
+########################################################
+##### The last attempts for any useful system info #####
+These might give lots of info, or new info.
+Then again, they might fail miserably.
+
+Try to access lscpi (through python).
+   ... we have a device_list
+
+ ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+ device at index: 0
+
+ All device information:
+ Device(
+     slot=Slot('0000:00:00.0'),
+     cls=NameWithID('Host bridge [0600]'),
+     vendor=NameWithID('Intel Corporation [8086]'),
+     device=NameWithID('Device [9b63]'),
+     subsystem_vendor=NameWithID('Dell [1028]'),
+     subsystem_device=NameWithID('Device [09c5]'),
+     revision=3,
+     progif=None,
+     driver=None,
+     kernel_modules=[],
+     numa_node=None,
+     iommu_group=None,
+     physical_slot=None
+)
+
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+
+
+ ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+ device at index: 1
+
+ All device information:
+ Device(
+     slot=Slot('0000:00:02.0'),
+     cls=NameWithID('VGA compatible controller [0300]'),
+     vendor=NameWithID('Intel Corporation [8086]'),
+     device=NameWithID('Device [9bc8]'),
+     subsystem_vendor=NameWithID('Dell [1028]'),
+     subsystem_device=NameWithID('Device [09c5]'),
+     revision=3,
+     progif=None,
+     driver=None,
+     kernel_modules=[],
+     numa_node=None,
+     iommu_group=None,
+     physical_slot=None
+)
+
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+
+
+ ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+ device at index: 2
+
+ All device information:
+ Device(
+     slot=Slot('0000:00:04.0'),
+     cls=NameWithID('Signal processing controller [1180]'),
+     vendor=NameWithID('Intel Corporation [8086]'),
+     device=NameWithID('Skylake Processor Thermal Subsystem [1903]'),
+     subsystem_vendor=NameWithID('Dell [1028]'),
+     subsystem_device=NameWithID('Device [09c5]'),
+     revision=3,
+     progif=None,
+     driver=None,
+     kernel_modules=[],
+     numa_node=None,
+     iommu_group=None,
+     physical_slot=None
+)
+
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+
+
+ ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+ device at index: 3
+
+ All device information:
+ Device(
+     slot=Slot('0000:00:08.0'),
+     cls=NameWithID('System peripheral [0880]'),
+     vendor=NameWithID('Intel Corporation [8086]'),
+     device=NameWithID('Skylake Gaussian Mixture Model [1911]'),
+     subsystem_vendor=NameWithID('Dell [1028]'),
+     subsystem_device=NameWithID('Device [09c5]'),
+     revision=None,
+     progif=None,
+     driver=None,
+     kernel_modules=[],
+     numa_node=None,
+     iommu_group=None,
+     physical_slot=None
+)
+
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+
+
+ ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+ device at index: 4
+
+ All device information:
+ Device(
+     slot=Slot('0000:00:12.0'),
+     cls=NameWithID('Signal processing controller [1180]'),
+     vendor=NameWithID('Intel Corporation [8086]'),
+     device=NameWithID('Device [06f9]'),
+     subsystem_vendor=NameWithID('Dell [1028]'),
+     subsystem_device=NameWithID('Device [09c5]'),
+     revision=None,
+     progif=None,
+     driver=None,
+     kernel_modules=[],
+     numa_node=None,
+     iommu_group=None,
+     physical_slot=None
+)
+
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+
+
+ ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+ device at index: 5
+
+ All device information:
+ Device(
+     slot=Slot('0000:00:14.0'),
+     cls=NameWithID('USB controller [0c03]'),
+     vendor=NameWithID('Intel Corporation [8086]'),
+     device=NameWithID('Device [06ed]'),
+     subsystem_vendor=NameWithID('Dell [1028]'),
+     subsystem_device=NameWithID('Device [09c5]'),
+     revision=None,
+     progif=48,
+     driver=None,
+     kernel_modules=[],
+     numa_node=None,
+     iommu_group=None,
+     physical_slot=None
+)
+
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+
+
+ ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+ device at index: 6
+
+ All device information:
+ Device(
+     slot=Slot('0000:00:14.2'),
+     cls=NameWithID('RAM memory [0500]'),
+     vendor=NameWithID('Intel Corporation [8086]'),
+     device=NameWithID('Device [06ef]'),
+     subsystem_vendor=NameWithID('Dell [1028]'),
+     subsystem_device=NameWithID('Device [09c5]'),
+     revision=None,
+     progif=None,
+     driver=None,
+     kernel_modules=[],
+     numa_node=None,
+     iommu_group=None,
+     physical_slot=None
+)
+
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+
+
+ ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+ device at index: 7
+
+ All device information:
+ Device(
+     slot=Slot('0000:00:15.0'),
+     cls=NameWithID('Serial bus controller [0c80]'),
+     vendor=NameWithID('Intel Corporation [8086]'),
+     device=NameWithID('Device [06e8]'),
+     subsystem_vendor=NameWithID('Dell [1028]'),
+     subsystem_device=NameWithID('Device [09c5]'),
+     revision=None,
+     progif=None,
+     driver=None,
+     kernel_modules=[],
+     numa_node=None,
+     iommu_group=None,
+     physical_slot=None
+)
+
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+
+
+ ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+ device at index: 8
+
+ All device information:
+ Device(
+     slot=Slot('0000:00:16.0'),
+     cls=NameWithID('Communication controller [0780]'),
+     vendor=NameWithID('Intel Corporation [8086]'),
+     device=NameWithID('Device [06e0]'),
+     subsystem_vendor=NameWithID('Dell [1028]'),
+     subsystem_device=NameWithID('Device [09c5]'),
+     revision=None,
+     progif=None,
+     driver=None,
+     kernel_modules=[],
+     numa_node=None,
+     iommu_group=None,
+     physical_slot=None
+)
+
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+
+
+ ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+ device at index: 9
+
+ All device information:
+ Device(
+     slot=Slot('0000:00:17.0'),
+     cls=NameWithID('RAID bus controller [0104]'),
+     vendor=NameWithID('Intel Corporation [8086]'),
+     device=NameWithID('Device [06d6]'),
+     subsystem_vendor=NameWithID('Dell [1028]'),
+     subsystem_device=NameWithID('Device [09c5]'),
+     revision=None,
+     progif=None,
+     driver=None,
+     kernel_modules=[],
+     numa_node=None,
+     iommu_group=None,
+     physical_slot=None
+)
+
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+
+
+ ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+ device at index: 10
+
+ All device information:
+ Device(
+     slot=Slot('0000:00:1c.0'),
+     cls=NameWithID('PCI bridge [0604]'),
+     vendor=NameWithID('Intel Corporation [8086]'),
+     device=NameWithID('Device [06bc]'),
+     subsystem_vendor=NameWithID(''),
+     subsystem_device=NameWithID(''),
+     revision=240,
+     progif=None,
+     driver=None,
+     kernel_modules=[],
+     numa_node=None,
+     iommu_group=None,
+     physical_slot=None
+)
+
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+
+
+ ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+ device at index: 11
+
+ All device information:
+ Device(
+     slot=Slot('0000:00:1c.7'),
+     cls=NameWithID('PCI bridge [0604]'),
+     vendor=NameWithID('Intel Corporation [8086]'),
+     device=NameWithID('Device [06bf]'),
+     subsystem_vendor=NameWithID(''),
+     subsystem_device=NameWithID(''),
+     revision=240,
+     progif=None,
+     driver=None,
+     kernel_modules=[],
+     numa_node=None,
+     iommu_group=None,
+     physical_slot=None
+)
+
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+
+
+ ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+ device at index: 12
+
+ All device information:
+ Device(
+     slot=Slot('0000:00:1f.0'),
+     cls=NameWithID('ISA bridge [0601]'),
+     vendor=NameWithID('Intel Corporation [8086]'),
+     device=NameWithID('Device [0684]'),
+     subsystem_vendor=NameWithID('Dell [1028]'),
+     subsystem_device=NameWithID('Device [09c5]'),
+     revision=None,
+     progif=None,
+     driver=None,
+     kernel_modules=[],
+     numa_node=None,
+     iommu_group=None,
+     physical_slot=None
+)
+
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+
+
+ ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+ device at index: 13
+
+ All device information:
+ Device(
+     slot=Slot('0000:00:1f.3'),
+     cls=NameWithID('Audio device [0403]'),
+     vendor=NameWithID('Intel Corporation [8086]'),
+     device=NameWithID('Device [06c8]'),
+     subsystem_vendor=NameWithID('Dell [1028]'),
+     subsystem_device=NameWithID('Device [09c5]'),
+     revision=None,
+     progif=None,
+     driver=None,
+     kernel_modules=[],
+     numa_node=None,
+     iommu_group=None,
+     physical_slot=None
+)
+
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+
+
+ ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+ device at index: 14
+
+ All device information:
+ Device(
+     slot=Slot('0000:00:1f.4'),
+     cls=NameWithID('SMBus [0c05]'),
+     vendor=NameWithID('Intel Corporation [8086]'),
+     device=NameWithID('Device [06a3]'),
+     subsystem_vendor=NameWithID('Dell [1028]'),
+     subsystem_device=NameWithID('Device [09c5]'),
+     revision=None,
+     progif=None,
+     driver=None,
+     kernel_modules=[],
+     numa_node=None,
+     iommu_group=None,
+     physical_slot=None
+)
+
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+
+
+ ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+ device at index: 15
+
+ All device information:
+ Device(
+     slot=Slot('0000:00:1f.5'),
+     cls=NameWithID('Serial bus controller [0c80]'),
+     vendor=NameWithID('Intel Corporation [8086]'),
+     device=NameWithID('Device [06a4]'),
+     subsystem_vendor=NameWithID('Dell [1028]'),
+     subsystem_device=NameWithID('Device [09c5]'),
+     revision=None,
+     progif=None,
+     driver=None,
+     kernel_modules=[],
+     numa_node=None,
+     iommu_group=None,
+     physical_slot=None
+)
+
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+
+
+ ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+ device at index: 16
+
+ All device information:
+ Device(
+     slot=Slot('0000:01:00.0'),
+     cls=NameWithID('Ethernet controller [0200]'),
+     vendor=NameWithID('Realtek Semiconductor Co., Ltd. [10ec]'),
+     device=NameWithID('Device [2600]'),
+     subsystem_vendor=NameWithID('Bigfoot Networks, Inc. [1a56]'),
+     subsystem_device=NameWithID('Device [2600]'),
+     revision=33,
+     progif=None,
+     driver=None,
+     kernel_modules=[],
+     numa_node=None,
+     iommu_group=None,
+     physical_slot=None
+)
+
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+
+
+ ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+ device at index: 17
+
+ All device information:
+ Device(
+     slot=Slot('0000:02:00.0'),
+     cls=NameWithID('Network controller [0280]'),
+     vendor=NameWithID('Qualcomm Atheros [168c]'),
+     device=NameWithID('QCA9377 802.11ac Wireless Network Adapter [0042]'),
+     subsystem_vendor=NameWithID('Dell [1028]'),
+     subsystem_device=NameWithID('Device [1810]'),
+     revision=49,
+     progif=None,
+     driver=None,
+     kernel_modules=[],
+     numa_node=None,
+     iommu_group=None,
+     physical_slot=None
+)
+
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+
+
+From qwqfetch, a python-only copycat of screenfetch
+Should be a good recap, but might not be complete.
+ ...
+bballdave025@MYMACHINE
+---------------------
+OS: Microsoft Windows 10 Home AMD64
+Host: Dell Inc. 0KV3RP
+Kernel: NT 10.0.19045
+Uptime: 7 days, 16 hours, 56 mins
+Shell: cmd 10.0.19045.4412
+Resolution: 1920x1080
+DE: Windows Shell
+CPU: Intel Core i3-10100 @ 3.60GHz (4) @ 3.60 GHz
+GPU: Trigger 6 External Graphics
+Memory: 8.72 GiB / 31.67 GiB
+
+>>>
+>>> retval = os.system( \
+...   "powershell -c (Get-Date -UFormat \"%s_%Y%m%dT%H%M%S%Z00\") " + \
+...   "-replace '[.][0-9]*_', '_'")
+1717399532_20240603T072532-0600
+>>>
+>>> exit()
+
+(conda-env-lora) C:\path\to\repo\and\script>python>
