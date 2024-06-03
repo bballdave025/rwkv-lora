@@ -1,0 +1,148 @@
+rsync -hatAXED --info=progress2 --compress-level=0 --stats /src/ /dst/
+
+
+
+Anast@DESKTOP-O7KM5A5 /cygdrive/c/David/cygwinroot20240602
+$ ls -lAh /
+total 4.0M
+drwx------+  1 Anast Anast             0 Jul  7  2023 .apt-cyg
+
+-rw-r--r--   1 Anast Administrators  53K Oct 26  2021 Cygwin-Terminal.ico
+-rwxr-xr-x+  1 Anast Anast            88 Oct 25  2021 Cygwin.bat
+-rw-r--r--   1 Anast Administrators 154K Oct 26  2021 Cygwin.ico
+
+drwxr-xr-x   1 Anast Anast             0 May  1 13:21 bin
+dr-xr-xr-x   1 Anast Anast             0 Jun  2 09:08 cygdrive
+drwxrwxr-x+  1 Anast Anast             0 Jul  7  2023 dev
+drwxr-xr-x+  1 Anast Anast             0 Apr 22 19:16 etc
+drwxrwxrwt   1 Anast Anast             0 Oct 27  2021 home
+drwxrwx---+  1 Anast Anast             0 Oct 25  2021 https%3a%2f%2fmirrors.kernel.org%2fsourceware%2fcygwin%2f
+drwxr-xr-x   1 Anast Anast             0 Apr 22 18:41 lib
+drwxr-xr-x   1 Anast Anast             0 Oct 25  2021 opt
+dr-xr-xr-x  11 Anast Anast             0 Jun  2 09:08 proc
+drwxr-xr-x   1 Anast Anast             0 Apr 22 18:27 sbin
+
+-rwxrwx---+  1 Anast Anast          1.3M Oct 25  2021 setup-x86_64.exe
+
+drwxr-xr-x   1 Anast Anast             0 Oct 25  2021 srv
+drwxrwxrwt   1 Anast Anast             0 Jun  2 08:36 tmp
+drwxr-xr-x   1 Anast Anast             0 Apr 22 18:25 usr
+drwxr-xr-x   1 Anast Anast             0 Oct 25  2021 var
+
+Anast@DESKTOP-O7KM5A5 /cygdrive/c/David/cygwinroot20240602
+$
+
+
+So, in /cygdrive/c/David/cygwinroot20240602/
+
+mkdir .apt-cyg/
+mkdir bin/
+mkdir dev/
+mkdir etc/
+mkdir home/
+mkdir https%3a%2f%2fmirrors.kernel.org%2fsourceware%2fcygwin%2f/
+mkdir lib/
+mkdir opt/
+#nope#mkdir proc/
+mkdir sbin/
+mkdir srv/
+mkdir tmp/
+mkdir usr/
+mkdir var/
+
+cp Cygwin-Terminal.ico .
+cp Cygwin.bat .
+cp Cygwin.ico .
+cp setup-x86_64 .
+
+rsync -hatAXED --info=progress2 --compress-level=0 --stats /.apt-cyg/ /cygdrive/c/David/cygwinroot20240602/.apt-cyg
+rsync -hatAXED --info=progress2 --compress-level=0 --stats /bin/ /cygdrive/c/David/cygwinroot20240602/bin/
+rsync -hatAXED --info=progress2 --compress-level=0 --stats /dev/ /cygdrive/c/David/cygwinroot20240602/dev/
+rsync -hatAXED --info=progress2 --compress-level=0 --stats /etc/ /cygdrive/c/David/cygwinroot20240602/etc/
+rsync -hatAXED --info=progress2 --compress-level=0 --stats /home/ /cygdrive/c/David/cygwinroot20240602/home/
+rsync -hatAXED --info=progress2 --compress-level=0 --stats /https%3a%2f%2fmirrors.kernel.org%2fsourceware%2fcygwin%2f/ /cygdrive/c/David/cygwinroot20240602/https%3a%2f%2fmirrors.kernel.org%2fsourceware%2fcygwin%2f/
+rsync -hatAXED --info=progress2 --compress-level=0 --stats /lib/ /cygdrive/c/David/cygwinroot20240602/lib/
+rsync -hatAXED --info=progress2 --compress-level=0 --stats /opt/ /cygdrive/c/David/cygwinroot20240602/opt/
+rsync -hatAXED --info=progress2 --compress-level=0 --stats /sbin/ /cygdrive/c/David/cygwinroot20240602/sbin/
+rsync -hatAXED --info=progress2 --compress-level=0 --stats /srv/ /cygdrive/c/David/cygwinroot20240602/srv/
+rsync -hatAXED --info=progress2 --compress-level=0 --stats /tmp/ /cygdrive/c/David/cygwinroot20240602/tmp/
+rsync -hatAXED --info=progress2 --compress-level=0 --stats /usr/ /cygdrive/c/David/cygwinroot20240602/usr/
+rsync -hatAXED --info=progress2 --compress-level=0 --stats /var/ /cygdrive/c/David/cygwinroot20240602/var/
+
+
+# then uninstall cygwin, 
+https://www.cygwin.com/faq.html#:~:text=2.20.%20How%20do%20I%20uninstall%20all%20of%20Cygwin
+https://superuser.com/a/663675/908741
+
+ C:\>takeown /r /d y /f cygwin
+Only worked for one folder ('var' I think)
+ C:\>icacls cygwin /t /grant Everyone:F
+worked
+ C:\>takeown /r /d y /f cygwin
+repeating this command worked after the above (second) command!!
+ C:\cygwin\bin>.\cygrunsrv.exe -E sshd
+gave access denied
+ C:\cygwin\bin>.\cygrunsrv.exe -R sshd
+gave access denied
+BUT I then went to Windows explorer and deleted (recycled) the C:\Cygwin folder and it worked. Gone completely.
+
+
+# reinstall Cygwin
+https://www.cygwin.com/#:~:text=Installing%20Cygwin
+https://web.archive.org/web/20240602152831/https://stackoverflow.com/questions/21230657/what-is-the-current-full-install-size-of-cygwin
+
+https://www.cygwin.com/install.html (has signature and public key)
+Q: How do I verify the signature of setup?
+A: e.g.
+
+$ gpg --recv-key 1A698DE9E2E56300
+gpg: requesting key 1A698DE9E2E56300 from hkp server keys.gnupg.net
+gpg: key 1A698DE9E2E56300: "Cygwin <cygwin@cygwin.com>" imported
+gpg: 3 marginal(s) needed, 1 complete(s) needed, PGP trust model
+gpg: depth: 0  valid:   8  signed:   2  trust: 0-, 0q, 0n, 0m, 0f, 8u
+gpg: depth: 1  valid:   2  signed:   0  trust: 2-, 0q, 0n, 0m, 0f, 0u
+gpg: Total number processed: 1
+gpg:               imported: 1  (RSA: 1)
+
+$ gpg --keyid-format=long --with-fingerprint --verify setup-x86_64.exe.sig setup-x86_64.exe
+[...]
+gpg: Signature made 12 Mar 2020 16:26:58 GMT
+gpg:                using RSA key 1A698DE9E2E56300
+gpg: Good signature from "Cygwin <cygwin@cygwin.com>"
+Primary key fingerprint: 5640 5CF6 FCC8 1574 682A  5D56 1A69 8DE9 E2E5 6300
+
+-^- use powershell -^-
+
+
+# get apt-cyg, put in .bashrc from dotfiles and vayzday
+
+# and mount the smartphone, with installs of 
+
+apt-cyg install -y gvfs-mtp
+apt-cyg install -y gio
+apt-cyg install -y lsusb
+
+and then
+
+https://web.archive.org/web/20240602153544/https://www.baeldung.com/linux/mounting-mtp-devices
+
+maybe try the  jmtpfs  installation
+
+
+# Get file modification dates for, e.g. Recordings, downloads, maybe pics
+https://web.archive.org/web/20240602153847/https://superuser.com/questions/737247/get-last-modified-date-of-file-in-linux
+
+Get in mounted directory,
+
+find . -type f -print0 | xargs -I'{}' -0 bash -c '
+  orig={};
+  echo
+  echo "-----------------------------------------------------------------"
+  echo "${orig}";
+  stat -c '%y' "${orig}";
+  echo;
+' >> /cygdrive/c/David/pixel6_files_info_move_start_2024-06-02.info.txt 2>&1
+
+Then copy everything from that directory using Windows explorer.
+
+
