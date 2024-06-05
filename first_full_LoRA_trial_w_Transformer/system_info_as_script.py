@@ -135,27 +135,47 @@ second_replace = "2indiViduAlsWokIntoABaRdiFf"
 ##  METHODS, ETC.
 ##-----------------
 
-def main():
+def main(is_for_sure_on_windows=False,
+         is_for_sure_on_google_colab=False,
+         is_for_sure_on_aws=False,
+         do_network_info=False
+):
   '''
   An easy-to-remember entrance from the command-line
   '''
   
-  print_system_information()
+  print_system_information(is_for_sure_on_windows,
+                           is_for_sure_on_google_colab,
+                           is_for_sure_on_aws,
+                           do_network_info
+  )
   
 ##endof:  main()
 
 
-def run():
+def run(is_for_sure_on_windows=False,
+        is_for_sure_on_google_colab=False,
+        is_for_sure_on_aws=False,
+        do_network_info=False
+):
   '''
   An easy-to-remember entrance from the module name.
   '''
   
-  print_system_information()
+  print_system_information(is_for_sure_on_windows,
+                           is_for_sure_on_google_colab,
+                           is_for_sure_on_aws,
+                           do_network_info
+  )
   
 ##endof:  run()
 
 
-def print_system_information():
+def print_system_information(is_for_sure_on_windows=False,
+                             is_for_sure_on_google_colab=False,
+                             is_for_sure_on_aws=False,
+                             do_network_info=False
+):
   '''
   Takes care of printing the system information. Right now, I know just Windows.
   
@@ -173,7 +193,7 @@ def print_system_information():
   '''
   
   print()
-  print_main_sys_info()
+  print_main_sys_info(do_network_info)
   print()
   print_boot_time()
   global first_replace
@@ -181,14 +201,17 @@ def print_system_information():
   print()
   print_cpu_info()
   print()
-  print_gpu_graphics_card_info()
+  print_gpu_graphics_card_info(is_for_sure_on_windows)
   print()
   print_memory_info()
   print()
   print_disk_info()
   print()
-  print("### No network info for now ###")
-  # print_network_info()
+  if not do_network_info:
+    print("### No network info for now ###")
+  else:
+    print_network_info()
+  ##endof:  if not do_network_info
   print()
   print("########################################################")
   print("##### The last attempts for any useful system info #####")
@@ -212,7 +235,7 @@ def print_system_information():
 ##endof:  print_system_information()
 
 
-def print_main_sys_info():
+def print_main_sys_info(do_network_info=False):
   '''
   High-level stuff
   '''
@@ -230,10 +253,14 @@ def print_main_sys_info():
   print(f"Machine: {uname.machine}")
   print(f"Processor: {uname.processor}")
   print(f"Processor: {cpuinfo.get_cpu_info()['brand_raw']}")
-  print("Ip-Address: NOT-FOR-NOW")
-  #print(f"Ip-Address: {socket.gethostbyname(socket.gethostname())}")
-  print("Mac-Address: NOT-FOR-NOW")
-  #print(f"Mac-Address: {':'.join(re.findall('..', '%012x' % uuid.getnode()))}")
+  if do_network_info:
+    print(f"Ip-Address: {socket.gethostbyname(socket.gethostname())}")
+    print(f"Mac-Address: " + \
+          f"{':'.join(re.findall('..', '%012x' % uuid.getnode()))}")
+  else:
+    print("Ip-Address: NOT-FOR-NOW")
+    print("Mac-Address: NOT-FOR-NOW")
+  ##endof:  if/else do_network_info
 ##endof:  print_main_sys_info()
 
 
@@ -275,7 +302,7 @@ def print_cpu_info():
 ##endof:  print_cpu_info()
 
 
-def print_gpu_graphics_card_info():
+def print_gpu_graphics_card_info(is_for_sure_on_windows=False):
   '''
   
   '''
@@ -286,26 +313,28 @@ def print_gpu_graphics_card_info():
   print(" (if any such information is to be found)")
   print()
   
-  if can_do_wmi:
-    try:
-      print("Using `wmi`, we get the following `win32_VideoController` names.")
-      this_computer = wmi.WMI()
-      for so_called_gpu in this_computer.Win32_VideoController():
-        print("  ", so_called_gpu.name)
-      ##endof:  for so_called_gpu in this_computer.Win32_VideoController()
-    except Exception as e_gr_wmi:
-      print("   ... There was a problem with using the PyPI `wml` module")
-      print("  Details:")
-      print(str(e_gr_wmi))
-      print("      ... Not a big surprise, since we're trying lots of ways")
-      print("          to get the info, especially since this module")
-      print("          wraps a Windows command. Not a big deal.")
-    finally:
-      pass
-    ##endof:  try/except/finally
-  else:
-    print("Can't use  wmi  to test for GPU/Graphics Card.")
-  ##endof:  if/else can_do_wmi
+  if is_for_sure_on_windows:
+    if can_do_wmi:
+      try:
+        print("Using `wmi`, we get the following `win32_VideoController` names.")
+        this_computer = wmi.WMI()
+        for so_called_gpu in this_computer.Win32_VideoController():
+          print("  ", so_called_gpu.name)
+        ##endof:  for so_called_gpu in this_computer.Win32_VideoController()
+      except Exception as e_gr_wmi:
+        print("   ... There was a problem with using the PyPI `wml` module")
+        print("  Details:")
+        print(str(e_gr_wmi))
+        print("      ... Not a big surprise, since we're trying lots of ways")
+        print("          to get the info, especially since this module")
+        print("          wraps a Windows command. Not a big deal.")
+      finally:
+        pass
+      ##endof:  try/except/finally
+    else:
+      print("Can't use  wmi  to test for GPU/Graphics Card.")
+    ##endof:  if/else can_do_wmi
+  ##endof:  if is_for_sure_on_windows
   
   if can_do_torch:
     print()
@@ -348,17 +377,18 @@ def print_gpu_graphics_card_info():
     print("# Tensorflow can give us CPU (and/or GPU) info.")
     print("The info here might help you know if we're running on a CPU.")
     device_lib.list_local_devices()
-    print("# -- (i) -- #")
-    print("Sometimes, this doesn't show up when run on Windows")
-    print("through this script, but it does show up when run from")
-    print("from the command prompt.")
-    print("(Where \"this\" refers to")
-    print("   tensorflow.python.client.device_lib.list_local_devices()")
-    print("If the other info tells you that this is probably")
-    print("Dave's PC in the corner of the room (3 screens),")
-    print("then the inbput/output on the command line would likely")
-    print("be as follows.")
-    print("""
+    if is_for_sure_on_windows:
+      print("# -- (i) -- #")
+      print("Sometimes, this doesn't show up when run on Windows")
+      print("through this script, but it does show up when run from")
+      print("from the command prompt.")
+      print("(Where \"this\" refers to")
+      print("   tensorflow.python.client.device_lib.list_local_devices()")
+      print("If the other info tells you that this is probably")
+      print("Dave's PC in the corner of the room (3 screens),")
+      print("then the inbput/output on the command line would likely")
+      print("be as follows.")
+      print("""
           (conda-env) >pip install tensorflow-cpu
           (conda-env) >python
           Python 3.10.14 | packaged by Anaconda, Inc. | \\
@@ -399,7 +429,8 @@ def print_gpu_graphics_card_info():
           ]
           >>>
 """
-    )
+        )
+      ##endof:  if is_for_sure_on_windows
     ##endof:  heredoc-ed string print
   ##endof:  if can_do_tfdl
   
@@ -606,7 +637,7 @@ def print_all_pci_devices_from_lspci(
     print("   ... problem with pylspci.parsers.SimpleParser")
     print("      ... not especially surprising, nor a big deal")
     print(str(e_lspci))
-    print("#  Note, if it says something about the file not being")
+    print("#  Note, if it said something about the file not being")
     print("#+ found, 'the file' is `lscpi`")
     print("         ... continuing with other ways to get information")
     # raise e_lspci
@@ -726,5 +757,10 @@ def get_qwqfetch_screenfetch_sysinfo():
 
 if __name__ == "__main__":
   #''' The script is called from the command-line '''
-  main()
+  
+  if len(sys.argv) > 1:
+    main(sys.argv)
+  else:
+    main()
+  ##endof:  if/else len(sys.argv) > 1
 ##endof:  if __name__ == "__main__"
