@@ -498,7 +498,7 @@ def print_gpu_graphics_card_info(is_for_sure_on_windows=False):
   print("Getting the 'GPU' line from the qwqfetch output")
   
   try:
-    qwq_str = get_qwqfetch_screenfetch_sysinfo()
+    qwq_str = get_qwqfetch_screenfetch_sysinfo(do_replace)
     if do_debug_qwq:
       print("# DEBUG # qwq_str:")
       print(qwq_str)
@@ -754,12 +754,12 @@ def output_long_info(the_device):
 ##endof:  output_long_info(the_device)
 
 
-def print_qwqfetch_screenfetch_sysinfo():
+def print_qwqfetch_screenfetch_sysinfo(do_replace=True):
   '''
   
   '''
   
-  print(get_qwqfetch_screenfetch_sysinfo())
+  print(get_qwqfetch_screenfetch_sysinfo(do_replace))
   
 ##endof:  print_qwqfetch_screenfetch_sysinfo()
 
