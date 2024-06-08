@@ -127,7 +127,7 @@ finally:
 first_replace_prime = "bballdave025"
 second_replace_prime = "MYMACHINE"
 vanilla_replace = "NOT-FOR-NOW"
-first_replace = "potAtoYOUnItdi0de"
+first_replace = "poTAtoYOUnItdi0de"
 second_replace = "2indiViduAlsWokIntoABaRdiFf"
 
 
@@ -138,7 +138,8 @@ second_replace = "2indiViduAlsWokIntoABaRdiFf"
 def main(is_for_sure_on_windows=False,
          is_for_sure_on_google_colab=False,
          is_for_sure_on_aws=False,
-         do_network_info=False
+         do_network_info=False,
+         do_replace=True
 ):
   '''
   An easy-to-remember entrance from the command-line
@@ -147,7 +148,8 @@ def main(is_for_sure_on_windows=False,
   print_system_information(is_for_sure_on_windows,
                            is_for_sure_on_google_colab,
                            is_for_sure_on_aws,
-                           do_network_info
+                           do_network_info,
+                           do_replace
   )
   
 ##endof:  main()
@@ -156,7 +158,8 @@ def main(is_for_sure_on_windows=False,
 def run(is_for_sure_on_windows=False,
         is_for_sure_on_google_colab=False,
         is_for_sure_on_aws=False,
-        do_network_info=False
+        do_network_info=False,
+        do_replace=True
 ):
   '''
   An easy-to-remember entrance from the module name.
@@ -165,7 +168,8 @@ def run(is_for_sure_on_windows=False,
   print_system_information(is_for_sure_on_windows,
                            is_for_sure_on_google_colab,
                            is_for_sure_on_aws,
-                           do_network_info
+                           do_network_info,
+                           do_replace
   )
   
 ##endof:  run()
@@ -174,7 +178,8 @@ def run(is_for_sure_on_windows=False,
 def print_system_information(is_for_sure_on_windows=False,
                              is_for_sure_on_google_colab=False,
                              is_for_sure_on_aws=False,
-                             do_network_info=False
+                             do_network_info=False,
+                             do_replace=True
 ):
   '''
   Takes care of printing the system information. Right now, I know just Windows.
@@ -229,13 +234,25 @@ def print_system_information(is_for_sure_on_windows=False,
   print("From qwqfetch, a python-only copycat of screenfetch")
   print("Should be a good recap, but might not be complete.")
   print(" ...")
-  print_qwqfetch_screenfetch_sysinfo()
+  try:
+    print_qwqfetch_screenfetch_sysinfo(do_replace)
+  except Exception as e_main_qwq:
+    print("Problem with qwqfetch.")
+    print("Details:")
+    print(str(e_main_qwq))
+    print("Not a big deal.")
+  finally:
+    pass
+  ##endof:  try/except/finally
+  print()
+  print("That's all we've got.")
   print()
   
 ##endof:  print_system_information()
 
 
-def print_main_sys_info(do_network_info=False):
+def print_main_sys_info(do_network_info=False,
+                        do_replace=True):
   '''
   High-level stuff
   '''
@@ -245,8 +262,11 @@ def print_main_sys_info(do_network_info=False):
   print(f"System: {uname.system}")
   global second_replace
   second_replace = uname.node
-  node_str = str(uname.node).replace(second_replace,
-                                     second_replace_prime)
+  node_str = str(uname.node)
+  if do_replace:
+    node_str = node_str.replace(second_replace,
+                                second_replace_prime)
+  ##endof:  if do_replace
   print(f"Node Name: {node_str}")
   print(f"Release: {uname.release}")
   print(f"Version: {uname.version}")
@@ -476,20 +496,30 @@ def print_gpu_graphics_card_info(is_for_sure_on_windows=False):
   print("There might be graphics card/GPU information in")
   print("the output from a python-only screenfetch copycat.")
   print("Getting the 'GPU' line from the qwqfetch output")
-  qwq_str = get_qwqfetch_screenfetch_sysinfo()
-  if do_debug_qwq:
-    print("# DEBUG # qwq_str:")
-    print(qwq_str)
-  ##endof:  if do_debug_qwq
-  gpu_entries = re.findall(r"\n([^\n]*GPU[^\n]+)\n", qwq_str)
-  if do_debug_qwq:
-    print("# DEBUG # gpu_entries:")
-    pprint.pp(gpu_entries)
-  ##endof:  if do_debug_qwq
-  for this_entry in gpu_entries:
-    print(this_entry)
- ##endof:  for this_entry in gpu_entries
-  print()
+  
+  try:
+    qwq_str = get_qwqfetch_screenfetch_sysinfo()
+    if do_debug_qwq:
+      print("# DEBUG # qwq_str:")
+      print(qwq_str)
+    ##endof:  if do_debug_qwq
+    gpu_entries = re.findall(r"\n([^\n]*GPU[^\n]+)\n", qwq_str)
+    if do_debug_qwq:
+      print("# DEBUG # gpu_entries:")
+      pprint.pp(gpu_entries)
+    ##endof:  if do_debug_qwq
+    for this_entry in gpu_entries:
+      print(this_entry)
+   ##endof:  for this_entry in gpu_entries
+    print()
+  except Exception as e_qwq:
+    print("Problem with qwqfetch.")
+    print("Details:")
+    print(str(e_qwq))
+    print("Not a biggie. Continuing on.")
+  finally:
+    pass
+  ##endof:  try/catch/finally
   
   print("Those are all our chances to find out about any GPU/Graphics Cards")
   
@@ -734,7 +764,7 @@ def print_qwqfetch_screenfetch_sysinfo():
 ##endof:  print_qwqfetch_screenfetch_sysinfo()
 
 
-def get_qwqfetch_screenfetch_sysinfo():
+def get_qwqfetch_screenfetch_sysinfo(do_replace=True):
   '''
   
   '''
@@ -744,13 +774,17 @@ def get_qwqfetch_screenfetch_sysinfo():
   
   ret_str = qwqfetch.get_result(False).split(
                "\n\n"
-             )[0].replace(
-                     first_replace, 
-                     first_replace_prime
-                ).replace(
-                  second_replace, 
-                  second_replace_prime
-                )
+             )[0]
+  if do_replace:
+    ret_str = ret_str.replace(
+                       first_replace, 
+                       first_replace_prime
+                    ).replace(
+                       second_replace, 
+                       second_replace_prime
+                    )
+  ##endof:  if do_replace
+  
   return ret_str
 ##endof:  print_qwqfetch_screenfetch_sysinfo()
 
