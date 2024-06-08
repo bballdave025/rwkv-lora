@@ -198,7 +198,8 @@ def print_system_information(is_for_sure_on_windows=False,
   '''
   
   print()
-  print_main_sys_info(do_network_info)
+  print_main_sys_info(do_network_info,
+                      do_replace)
   print()
   print_boot_time()
   global first_replace
@@ -206,7 +207,8 @@ def print_system_information(is_for_sure_on_windows=False,
   print()
   print_cpu_info()
   print()
-  print_gpu_graphics_card_info(is_for_sure_on_windows)
+  print_gpu_graphics_card_info(is_for_sure_on_windows,
+                               do_replace)
   print()
   print_memory_info()
   print()
@@ -322,7 +324,8 @@ def print_cpu_info():
 ##endof:  print_cpu_info()
 
 
-def print_gpu_graphics_card_info(is_for_sure_on_windows=False):
+def print_gpu_graphics_card_info(is_for_sure_on_windows=False,
+                                 do_replace=True):
   '''
   
   '''
