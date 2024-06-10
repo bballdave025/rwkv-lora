@@ -19,9 +19,12 @@ __pycache__/
 .ipynb_checkpoints/
 
 # (I think) model stuff that gets sent to the Hugging Face repo
-**/output/
-**/logging/
-**/training/
+#  It says that a bunch of stuff about the tokenizer, tokens, vocab
+#+ goes in output. Might as well keep logging, even if I don't
+#+ understand it. training also seems to have some token stuff.
+##**/output/
+##**/logging/
+##**/training/
 
 # None of those backup files
 *~
