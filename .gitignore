@@ -24,7 +24,14 @@ __pycache__/
 #+ understand it. training also seems to have some token stuff.
 ##**/output/
 ##**/logging/
-##**/training/
+##**/testing/
+
+**/merged_adapters/
+merged_adapters/
+**/output/
+output/
+#first_full_LoRA_trial_w_Transformer/logging/
+#first_full_LoRA_trial_w_Transformer/testing/
 
 # None of those backup files
 *~
