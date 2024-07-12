@@ -1,9 +1,11 @@
-# @file: environment.yml
-# @since 2024-06-03
-## 1717411989_2024-06-03T105309-0600
+# @file: environment-cpu.yml
+# @since 2024-06-08
+## ## 1717901803+2024-06-08T205643-0600
 ## IMPORTANT NOTES
 ##
-##  A couple of installations were made from git repos. 
+##  A couple of installations were made from git repos. (These next commands
+##+ were the originals - look below for the commands needed for 
+##+ reproducibility.)
 ##     >pip install git+https://github.com/huggingface/peft.git
 ##     >pip install git+https://github.com/nexplorer-3e/qwqfetch
 ##
@@ -16,14 +18,44 @@
 ##       to commit f72d222e2fff5ffea9f4e4b3a203e4c4d9e8cf00
 ##   Successfully installed qwqfetch-0.0.0
 ##
-#
+##  !!!!! So, the command should be !!!!!
+## (Where I highly recommend putting the whole command on one line
+##+ and therefore NOT including the continue-line character - 
+##+ '^', '`', or `\`.)
+##
+## (Windows CMD)
+##>pip install git+https://github.com/huggingface/qwqfetch.git@^
+## f72d222e2fff5ffea9f4e4b3a203e4c4d9e8cf00
+##
+## (Windows PowerShell)
+##>pip install git+https://github.com/huggingface/qwqfetch.git@`
+## f72d222e2fff5ffea9f4e4b3a203e4c4d9e8cf00
+##
+## (*NIX-like)
+##$ pip install git+https://github.com/huggingface/qwqfetch.git@\
+##  f72d222e2fff5ffea9f4e4b3a203e4c4d9e8cf00
+##  !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 ##-----
 ##  peft: I installed PEFT among other things, but I'm picking out 
 ##+       stuff relevant to peft. PEFT has LoRA in it.
 ##
 ##   Resolved https://github.com/huggingface/peft.git \
 ##       to commit e7b75070c72a88f0f7926cc6872858a2c5f0090d
-## Successfully built peft
+##   Successfully built peft
+##
+##  !!!!! So, the command should be !!!!!
+## (Windows CMD)
+##>pip install git+https://github.com/huggingface/peft.git@^
+## e7b75070c72a88f0f7926cc6872858a2c5f0090d
+##
+## (Windows PowerShell)
+##>pip install git+https://github.com/huggingface/peft.git@`
+## e7b75070c72a88f0f7926cc6872858a2c5f0090d
+##
+## (*NIX-like)
+##$ pip install git+https://github.com/huggingface/peft.git@\
+##  e7b75070c72a88f0f7926cc6872858a2c5f0090d
+##  !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 #
 #
 

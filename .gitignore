@@ -1,3 +1,50 @@
+#@brief   A .gitignore file for rwkv-lora
+#@file    .gitignore
+#@author  David BLACK  GitHub: @bballdave025
+#                Hugging Face: @thebballdave025
+#@since   2024-06-08
+#
+#  -v- In case this file gets copied to another repo without changing -v-
+#+ -v- this stuff, there will be a reference to the previous repo     -v-
+#@orig_repo  rwkv-lora
+#@project    rwkv-lora
+#@package    None for now.
+
+
+# Specific directories
+**/__pycache__/
+__pycache__/
+
+**/.ipynb_checkpoints/
+.ipynb_checkpoints/
+
+# (I think) model stuff that gets sent to the Hugging Face repo
+#  It says that a bunch of stuff about the tokenizer, tokens, vocab
+#+ goes in output. Might as well keep logging, even if I don't
+#+ understand it. training also seems to have some token stuff.
+##**/output/
+##**/logging/
+##**/testing/
+
+**/merged_adapters/
+merged_adapters/
+#**/output/
+#output/
+
+#first_full_LoRA_trial_w_Transformer/merged_adapters/
+##first_full_LoRA_trial_w_Transformer/output/
+##first_full_LoRA_trial_w_Transformer/logging/
+##first_full_LoRA_trial_w_Transformer/testing/
+
+# None of those backup files
+*~
+
+# None of those Windows Office (at least MS Word) backup files
+$~*
+
+
+##### Below here was the GitHub generated Python template #####
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
