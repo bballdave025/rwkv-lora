@@ -1,0 +1,68 @@
+
+ Using './Sharing Environments – Introduction to Conda for (Data) Scientists.pdf' as the filename to normalize
+
+ You didn't specify whether this was the best quality
+ or not, so we're using the default that
+ is_best_1='false'
+Trying for dimensions ... 
+
+dimensions_1: 
+Any errors: 
+./Sharing Environments – Introduction to Conda for (Data) Scientists.pdf: Invalid data found when processing input
+
+
+#### DEBUG ####
+#             #
+filename_1: './Sharing Environments – Introduction to Conda for (Data) Scientists.pdf'
+is_best_1: 'false'
+dimensions_1: ''
+#             #
+Command should be
+new_fname_1=$(python -u rus_greek_etc_to_ascii.py "./Sharing Environments – Introduction to Conda for (Data) Scientists.pdf" "false" "" 2>&1)
+#             #
+###############
+
+
+ [Possibly]
+new_fname_1: Sharing_Environments_Introduction_to_Conda_for_Data_Scientists_pdf
+
+Any errors: 
+
+In case this was a non-patterned file ...
+
+#### DEBUG ####
+#             #
+end_check_orig_f1: .pdf
+end_check_new_f1: _pdf
+change_is_likely_needed: 1
+Any errors: 
+
+Any errors: 
+
+#             #
+extension_orig_f1: pdf
+extension_new_f1: pdf
+extensions_are_compatible: 1
+#             #
+separator_orig_f1: .
+separator_new_f1: _
+is_likely_changed_extension: 1
+Any errors: 
+
+#             #
+change_is_almost_certainly_needed: 1
+#             #
+###############
+
+   ... after the checks:
+
+new_fname_1: Sharing_Environments_Introduction_to_Conda_for_Data_Scientists.pdf
+Any errors: 
+
+
+
+Any errors:
+
+  ... rename success
+
+
