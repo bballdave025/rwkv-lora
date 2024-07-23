@@ -1,0 +1,8 @@
+#  Remember to `pip install `jamo` (go through other commands first),
+#+ meaning also 
+#+ `source ~/.startconda` and `conda activate get-workouts-out`
+#+ then `pip install jamo`
+find . -maxdepth 1 -type f \( -not -name "*.sh" -a -not -name "*.py" -a -not -name "*.out" -a -not -name "*.txt" -a -not -name "*.pyc" \) -print0 | xargs -I'{}' -0 bash -c './rename_file_to_ascii.sh "{}"'
+#
+# OR, for one file,
+./rename_file_to_ascii.sh <filename-remember-escape-spaces-or-use-quotes>
