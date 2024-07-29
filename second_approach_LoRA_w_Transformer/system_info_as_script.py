@@ -743,13 +743,13 @@ def output_long_info(the_device):
   
   all_device_info_str = str(the_device)
   all_device_info_str = re.sub(r"([(,][ ]?)([0-9A-Za-z_]+[=])",
-                                "\g<1>\n     \g<2>",
-                                all_device_info_str,
-                                flags=re.I|re.M
+                               r"\g<1>\n     \g<2>",
+                               all_device_info_str,
+                               flags=re.I|re.M
                         )
   all_device_info_str = re.sub(r"(.)([)])$",
-                                "\g<1>\n\g<2>",
-                                all_device_info_str
+                               r"\g<1>\n\g<2>",
+                               all_device_info_str
                         )
   print("\n", "All device information:", "\n",
         all_device_info_str, "\n", 

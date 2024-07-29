@@ -42,7 +42,7 @@ h11==0.14.0
 h5py==3.11.0
 httpcore==1.0.5
 httpx==0.27.0
-huggingface-hub==0.24.2
+huggingface-hub==0.24.3
 humanfriendly==10.0
 idna==3.7
 ipykernel==6.29.5
@@ -97,7 +97,7 @@ packaging==24.1
 pandas==2.2.2
 pandocfilters==1.5.1
 parso==0.8.4
-peft @ git+https://github.com/huggingface/peft.git@f2b6d13f1dbc971c7653aa65e82822ea2d84bb38
+peft @ git+https://github.com/huggingface/peft.git@27833a2e60274aae1cfc638d2b536782e7ec3f7a
 platformdirs==4.2.2
 prometheus_client==0.20.0
 prompt_toolkit==3.0.47
@@ -144,6 +144,7 @@ tensorflow==2.17.0
 tensorflow-intel==2.17.0
 termcolor==2.4.0
 terminado==0.18.1
+tf_keras==2.17.0
 tinycss2==1.3.0
 tokenizers==0.19.1
 torch==2.4.0

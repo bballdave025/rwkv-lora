@@ -1,0 +1,93 @@
+# @file : environment.yml
+#  Now used for
+#+     'environment.yml'
+#+   a meant-to-be OS-agnostic package list
+#======
+
+# @file: environment.yml
+# @file: full_environment-cpu
+# @since 2024-07-29
+## 1722268210_20240729T155010-0600
+## IMPORTANT NOTES
+##
+##  A couple of installations were made from git repos. (These next commands
+##+ were the originals - look below for the commands needed for 
+##+ reproducibility.)
+##     >pip install git+https://github.com/huggingface/peft.git
+##     >pip install git+https://github.com/nexplorer-3e/qwqfetch
+##
+##  The commit info will be important for reproducibility.
+##
+#
+##-----
+##  peft: I installed PEFT among other things, but I'm picking out 
+##+       stuff relevant to peft. PEFT has LoRA in it.
+##
+##   Resolved https://github.com/huggingface/peft.git to \
+##     commit 27833a2e60274aae1cfc638d2b536782e7ec3f7a
+##   Successfully built peft
+##
+##  !!!!! So, the command should be !!!!!
+## (Windows CMD)
+##>pip install git+https://github.com/huggingface/peft.git@^
+## 27833a2e60274aae1cfc638d2b536782e7ec3f7a
+##
+## (Windows PowerShell)
+##>pip install git+https://github.com/huggingface/peft.git@`
+## 27833a2e60274aae1cfc638d2b536782e7ec3f7a
+##
+## (*NIX-like)
+##$ pip install git+https://github.com/huggingface/peft.git@\
+##  27833a2e60274aae1cfc638d2b536782e7ec3f7a
+##  !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+#
+#
+##-----
+##  qwqfetch   for system info
+##
+##   Resolved https://github.com/nexplorer-3e/qwqfetch.git to \
+##     commit f72d222e2fff5ffea9f4e4b3a203e4c4d9e8cf00
+##   Successfully installed qwqfetch-0.0.0
+##
+##  !!!!! So, the command should be !!!!!
+##
+## (Windows CMD)
+##>pip install git+https://github.com/huggingface/qwqfetch.git@^
+## f72d222e2fff5ffea9f4e4b3a203e4c4d9e8cf00
+##
+## (Windows PowerShell)
+##>pip install git+https://github.com/huggingface/qwqfetch.git@`
+## f72d222e2fff5ffea9f4e4b3a203e4c4d9e8cf00
+##
+## (*NIX-like)
+##$ pip install git+https://github.com/huggingface/qwqfetch.git@\
+##  f72d222e2fff5ffea9f4e4b3a203e4c4d9e8cf00
+##  !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+#
+
+name: t5-and-lora
+channels:
+  - defaults
+dependencies:
+  - python=3.12.4
+  - pip=24.2
+  - pip:
+      - pip==24.2
+      - accelerate==0.33.0
+      - bitsandbytes==0.43.2
+      - datasets==2.20.0
+      - evaluate==0.4.2
+      - huggingface-hub==0.24.3
+      - humanfriendly==10.0
+      - jupyter==1.0.0
+      - nltk==3.8.1
+      - peft==0.12.1.dev0
+      - py-cpuinfo==9.0.0
+      - pylspci==0.4.3
+      - rouge-score==0.1.2
+      - tensorflow==2.17.0
+      - tf-keras==2.17.0
+      - torch==2.4.0
+      - transformers==4.43.3
+      - trl==0.9.6
+      - wmi==1.5.1
