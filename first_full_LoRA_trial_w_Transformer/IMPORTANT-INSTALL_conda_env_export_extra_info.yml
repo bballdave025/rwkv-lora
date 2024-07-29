@@ -24,8 +24,8 @@
 #======
 
 # @file: <yml-conda-env-export-filename>
-# @since 2024-06-08
-## 1717901803+2024-06-08T205643-0600
+# @since 2024-07-28
+## 1722202095_20240728T212815-0600
 ## IMPORTANT NOTES
 ##
 ##  A couple of installations were made from git repos. (These next commands
@@ -36,6 +36,30 @@
 ##
 ##  The commit info will be important for reproducibility.
 ##
+#
+##-----
+##  peft: I installed PEFT among other things, but I'm picking out 
+##+       stuff relevant to peft. PEFT has LoRA in it.
+##
+##   Resolved https://github.com/huggingface/peft.git \
+##     to commit f2b6d13f1dbc971c7653aa65e82822ea2d84bb38
+##   Successfully built peft
+##
+##  !!!!! So, the command should be !!!!!
+## (Windows CMD)
+##>pip install git+https://github.com/huggingface/peft.git@^
+## f2b6d13f1dbc971c7653aa65e82822ea2d84bb38
+##
+## (Windows PowerShell)
+##>pip install git+https://github.com/huggingface/peft.git@`
+## f2b6d13f1dbc971c7653aa65e82822ea2d84bb38
+##
+## (*NIX-like)
+##$ pip install git+https://github.com/huggingface/peft.git@\
+##  f2b6d13f1dbc971c7653aa65e82822ea2d84bb38
+##  !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+#
+#
 ##-----
 ##  qwqfetch   for system info
 ##
@@ -55,27 +79,6 @@
 ##
 ## (*NIX-like)
 ##$ pip install git+https://github.com/huggingface/qwqfetch.git@\
-##  e7b75070c72a88f0f7926cc6872858a2c5f0090d
-##  !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-##-----
-##  peft: I installed PEFT among other things, but I'm picking out 
-##+       stuff relevant to peft. PEFT has LoRA in it.
-##
-##   Resolved https://github.com/huggingface/peft.git \
-##       to commit e7b75070c72a88f0f7926cc6872858a2c5f0090d
-##   Successfully built peft
-##
-##  !!!!! So, the command should be !!!!!
-## (Windows CMD)
-##>pip install git+https://github.com/huggingface/peft.git@^
-## e7b75070c72a88f0f7926cc6872858a2c5f0090d
-##
-## (Windows PowerShell)
-##>pip install git+https://github.com/huggingface/peft.git@`
-## e7b75070c72a88f0f7926cc6872858a2c5f0090d
-##
-## (*NIX-like)
-##$ pip install git+https://github.com/huggingface/peft.git@\
 ##  e7b75070c72a88f0f7926cc6872858a2c5f0090d
 ##  !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 #
@@ -98,8 +101,8 @@
 #======
 
 # @file: <yml-conda-env-export-filename>
-# @since 2024-06-01
-## 1717273346_2024-06-01T142226-0600
+# @since 2024-07-28
+## 1722202095_20240728T212815-0600
 ## IMPORTANT NOTES
 ##
 ##  A couple of installations were made from git repos. 
@@ -109,49 +112,70 @@
 ##  The commit info will be important for reproducibility.
 ##
 ##
-##  qwqfetch   for system info
-##
-## (rwkv-lora-pat) C:\bbd025\my_repos_dwb>pip install git+https://github.com/nexplorer-3e/qwqfetch
-## :: Gave me the following output
-## Collecting git+https://github.com/nexplorer-3e/qwqfetch
-##   Cloning https://github.com/nexplorer-3e/qwqfetch to c:\users\bballdave025\appdata\local\temp\pip-req-build-io_kpwxh
-##   Running command git clone --filter=blob:none --quiet https://github.com/nexplorer-3e/qwqfetch 'C:\Users\bballdave025\AppData\Local\Temp\pip-req-build-io_kpwxh'
-##   Resolved https://github.com/nexplorer-3e/qwqfetch to commit f72d222e2fff5ffea9f4e4b3a203e4c4d9e8cf00
-##   Installing build dependencies ... done
-##   Getting requirements to build wheel ... done
-##   Installing backend dependencies ... done
-##   Preparing metadata (pyproject.toml) ... done
-## Building wheels for collected packages: qwqfetch
-##   Building wheel for qwqfetch (pyproject.toml) ... done
-##   Created wheel for qwqfetch: filename=qwqfetch-0.0.0-py3-none-any.whl size=38544 sha256=858c8f77601098e057c5bd91c3d13e63adea8d279c97c1637268c53f468ab8d7
-##   Stored in directory: C:\Users\bballdave025\AppData\Local\Temp\pip-ephem-wheel-cache-2djmw082\wheels\4a\b7\9c\9ee3598b01bac13c2b6a07ceebc9e48b4371e6dfb43bb04f9f
-## Successfully built qwqfetch
-#  Installing collected packages: qwqfetch
-## Successfully installed qwqfetch-0.0.0
-##
-## (rwkv-lora-pat) C:\bbd025\my_repos_dwb>
-#
 #
 ##  I installed PEFT among other things, but I'm picking out relevant stuff.
 ##  PEFT has LoRA in it.
 ##
-## (rwkv-lora-pat) C:\bbd025\my_repos_dwb\rwkv-lora>pip install git+https://github.com/huggingface/peft.git
+## % pip install git+https://github.com/huggingface/peft.git
 ## :: gave me the following output
 ## Collecting git+https://github.com/huggingface/peft.git
-##   Cloning https://github.com/huggingface/peft.git to c:\users\bballdave025\appdata\local\temp\pip-req-build-6rehf9xv
-##   Running command git clone --filter=blob:none --quiet https://github.com/huggingface/peft.git 'C:\Users\bballdave025\AppData\Local\Temp\pip-req-build-6rehf9xv'
-##   Resolved https://github.com/huggingface/peft.git to commit e7b75070c72a88f0f7926cc6872858a2c5f0090d
-##   Installing build dependencies ... done
-##   Getting requirements to build wheel ... done
-##   Installing backend dependencies ... done
-##   Preparing metadata (pyproject.toml) ... done
-## Building wheels for collected packages: peft
-##   Building wheel for peft (pyproject.toml) ... done
-##   Created wheel for peft: filename=peft-0.11.2.dev0-py3-none-any.whl size=254320 sha256=183fa99464183c4841c7f777ed1f66697e3f9876291f3bad7297e6ac987e8d1b
-##   Stored in directory: C:\Users\bballdave025\AppData\Local\Temp\pip-ephem-wheel-cache-1hmm7vq2\wheels\d7\c7\de\1368fac8590e1b103ddc2ec2a28ad51d83aded1a3830e8a087
+##  Cloning https://github.com/huggingface/peft.git to \
+##    c:\users\bballdave025\appdata\local\temp\pip-req-build-9pbjy304
+##  Resolved https://github.com/huggingface/peft.git to \
+##    commit f2b6d13f1dbc971c7653aa65e82822ea2d84bb38
+##  Installing build dependencies: started
+##  Installing build dependencies: finished with status 'done'
+##  Getting requirements to build wheel: started
+##  Getting requirements to build wheel: finished with status 'done'
+##  Preparing metadata (pyproject.toml): started
+##  Preparing metadata (pyproject.toml): finished with status 'done'
+##... ...
+##  Building wheels for collected packages: peft
+##  Building wheel for peft (pyproject.toml): started
+##  Building wheel for peft (pyproject.toml): finished with status 'done'
+##  Created wheel for peft: filename=peft-0.12.1.dev0-py3-none-any.whl \
+##    size=294597 \
+##    sha256=dc8eb0d1ff5c7db7a3c325cae730359e0d514ff066a8b638b0021bb1f405e891
+##  Stored in directory: C:\Users\bballdave025\AppData\\
+##    Local\Temp\pip-ephem-wheel-cache-4aj2n2a7\wheels\\
+##    5d\16\61\117d50be36b7cb532817817523554825ff840d223c0f65c2c4
 ## Successfully built peft
+## Installing collected packages: peft
+## Successfully installed peft-0.12.1.dev0
 ##
-## (rwkv-lora-pat) C:\bbd025\my_repos_dwb\rwkv-lora>
+## %
+#
+##
+##  qwqfetch   for system info
+##
+## % pip install git+https://github.com/nexplorer-3e/qwqfetch
+## :: Gave me the following output
+## Collecting git+https://github.com/nexplorer-3e/qwqfetch.git
+##  Cloning https://github.com/nexplorer-3e/qwqfetch.git to \
+##    c:\users\bballdave025\appdata\local\temp\pip-req-build-61pwt77c
+##  Resolved https://github.com/nexplorer-3e/qwqfetch.git to \
+##    commit f72d222e2fff5ffea9f4e4b3a203e4c4d9e8cf00
+##  Installing build dependencies: started
+##  Installing build dependencies: finished with status 'done'
+##  Getting requirements to build wheel: started
+##  Getting requirements to build wheel: finished with status 'done'
+##  Preparing metadata (pyproject.toml): started
+##  Preparing metadata (pyproject.toml): finished with status 'done'
+## Building wheels for collected packages: qwqfetch
+##  Building wheel for qwqfetch (pyproject.toml): started
+##  Building wheel for qwqfetch (pyproject.toml): finished with status 'done'
+##  Created wheel for qwqfetch: filename=qwqfetch-0.0.0-py3-none-any.whl \
+##    size=38546 \
+##    sha256=fecebe49cda5f999779e9f1454be5ba0455c2a42a7bd6bfdf13925449153f110
+##  Stored in directory: C:\Users\bballdave025\AppData\\
+##    Local\Temp\pip-ephem-wheel-cache-culdfr6o\wheels\\
+##    09\09\d9\b88303b76e0143121a49075fc650f2934ad87cfdde415c84d4
+## Successfully built qwqfetch
+## Installing collected packages: qwqfetch
+## Successfully installed qwqfetch-0.0.0
+##
+## %
+#
 #
 #
 
