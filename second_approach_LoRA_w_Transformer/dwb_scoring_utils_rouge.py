@@ -58,7 +58,7 @@ def compute_google_rouge_score(predictions,
                                  A list of length one is perfectly 
                                  acceptable
     
-    @param    list  rouge_types  \[Optional\]
+    @param    list  rouge_types  \\[Optional\\]
                                  The type of ROUGE score desired. The list
                                  may contain any combination of or all of
                                  {"rouge1", "rouge2", "rougeL", "rougeLsum"}
@@ -137,13 +137,13 @@ def format_rouge_score_rough(this_rouge_str):
     rouge_ret_str = this_rouge_str
     
     rouge_ret_str = re.sub(r"([(,][ ]?)([0-9A-Za-z_]+[=])",
-                            "\g<1>\n     \g<2>",
+                           r"\g<1>\n     \g<2>",
                            rouge_ret_str,
                            flags=re.I|re.M
     )
     
     rouge_ret_str = re.sub(r"(.)([)])$",
-                            "\g<1>\n\g<2>",
+                           r"\g<1>\n\g<2>",
                            rouge_ret_str
     )
 
